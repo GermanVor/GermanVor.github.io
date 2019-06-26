@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
-import autoBind from "react-autobind";
+import React from 'react';
 
-export default class  Check extends  Component{
-    constructor(props){
-        super(props);
-        autoBind(this);
-    }
-
-    render(){
-        return (
+export default  ( { title, Url, onClickToGetPost} ) => (
             <div className="Check" >
-                    <h3>{this.props.title}</h3>
+                <h3>{title}</h3>
                 <div>
-                    <form action={'https://www.reddit.com' + this.props.Url} target="_blank">
+                    <form action={'https://www.reddit.com' + Url} target="_blank">
                         <input type="submit" value="GoToSource"  alt="thumbnail"/>
                     </form>
-                    <button onClick={()=>this.props.onClickToGetPost(this.props.Url)}>GetPost</button>
+                    <button onClick={()=>onClickToGetPost(Url)}>GetPost</button>
                 </div>
             </div>
-        )
-    };
-}
+)
+

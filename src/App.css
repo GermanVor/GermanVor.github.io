@@ -1,33 +1,66 @@
-.App {
-  text-align: center;
+
+main {
+  margin:  0 55px ; /* Выравниваем по центру */
+  font-size: 1.45em;
+ }
+ .header { 
+  font-size: 2.2em; /* Размер текста */
+  text-align: center; /* Выравнивание по центру */
+  padding: 5px; /* Отступы вокруг текста */
+  border-bottom: 3px solid #3d7e9a; 
+ }
+ 
+ aside {
+  float: left;
+  box-shadow: inset 50px 0 50px -50px #29627e;
+  font-style: italic;
+  color: #29627e;
+  background-color: white;
+}
+aside nav {
+  font-size: 1.8em; /* Размер текста */
+  margin: 0 25px 0 200px ;
+}
+img.me{
+  width: 20%;
+    height: auto;
+}
+ 
+section p{
+  border-bottom: 3px solid #3d7e9a; 
+  padding-bottom: 15px;
+  margin: 10px 0 25px;
+
+  background-color: rgba(40, 160, 138, 0.2);
+  padding: 7px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+section h1{
+  padding: 25px 0;
+  font-size: 2.2em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+section h2{
+  margin-left: 7px;
+}
+.footerBar{
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.footerBar img{
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  -webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
+  filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
+  transition-property: all;
+  transform: scale(1.0);
+  transition-duration: 500ms;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footerBar img:hover{
+  transform: scale(1.2);
+  transition-property: all;
+  transition-duration: 500ms;
+  transition-delay: 0s;
 }

@@ -1,0 +1,990 @@
+Index: src/containers/VaporList.css
+===================================================================
+--- src/containers/VaporList.css	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/containers/VaporList.css	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
+@@ -1,0 +0,0 @@
+Index: src/containers/VaporList.js
+===================================================================
+--- src/containers/VaporList.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/containers/VaporList.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
+@@ -1,49 +0,0 @@
+-import React, { Component } from 'react';
+-import autoBind from 'react-autobind';
+-import { connect } from 'react-redux';
+-import './VaporList.css';
+-import * as postsActions from '../store/posts/actions';
+-import * as postsSelectors from '../store/posts/reducer';
+-import ListView from '../components/ListView';
+-import  PostView from '../components/ListView';
+-
+-class VaporScreen extends  Component{
+-    constructor(props){
+-        super(props);
+-        autoBind(this);
+-    }
+-
+-    renderRow(post) {
+-        return (
+-            <PostView>
+-                <h2>{post.title}</h2>
+-                <a href={this.props.post.url} target="_blank">
+-                    { !post.thumbnail ? false :
+-                        <img src={post.thumbnail} />
+-                    }
+-                </a>
+-                <div className="cta">
+-                    <button className="Puuk">Puuk</button>
+-                    <button className="Read">Read</button>
+-                </div>
+-            </PostView>
+-        );
+-    }
+-
+-    render(){
+-        return (
+-            <div className="VaporList GRID">
+-                    <ListView
+-                        rowsIdArray={this.props.topicsUrlArray}
+-                        rowsById={this.props.topicsByUrl}
+-                        renderRow={< PostView
+-                            postTitle={post.title}
+-                            postURL={this.props.post.url}
+-                            postThumbnail={post.thumbnail}
+-                          //this.renderRow
+-                    />}/>
+-            </div>
+-        );
+-    }
+-}
+-
+Index: src/containers/Xyinia.js
+===================================================================
+--- src/containers/Xyinia.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/containers/Xyinia.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
+@@ -1,112 +0,0 @@
+-//временная хуйня
+-import React, { Component } from 'react';
+-import autoBind from 'react-autobind';
+-import { connect } from 'react-redux';
+-import '../style/basics.css'
+-import PostView from '../components/PostView'
+-import * as postsActions from "../store/posts/actions";
+-import * as types from "../store/posts/actionTypes";
+-import  * as topicsSelectors from "../store/posts/reducer"
+-import  Check from '../components/Check'
+-
+-class Xyinia extends  Component{
+-    constructor(props){
+-        super(props);
+-        this.state = {
+-            input: ''
+-        };
+-        autoBind(this);
+-    }
+-
+-    componentDidMount(){
+-        this.props.TopicsAction();
+-    }
+-
+-    handleChange(event) {
+-        this.setState({
+-            input: event.target.value
+-        });
+-    }
+-    submitMessage() {
+-
+-        if(this.state.input!=='')//this.state.input!==''
+-            this.props.submitNewMessage(
+-                <PostView
+-                    tit={this.state.input}
+-                    CLS={this.clearMessage}
+-                />);
+-
+-        console.log(this.props);
+-        this.setState({
+-            input: ''
+-        });
+-    }
+-    clearMessage(){
+-        console.log(this.props);
+-        this.props.clearAllMessage();
+-        this.setState({
+-            input: ''
+-        });
+-    }
+-
+-    render(){
+-        return (
+-            <div>
+-                <h1>Type in a new Message:</h1>
+-                <input
+-                    value={this.state.input}
+-                    onChange={this.handleChange}/><br/>
+-                <button onClick={this.submitMessage}>Submit</button>
+-                <button onClick={this.clearMessage}>Clear ALL</button>
+-                <div className='GRID'>{
+-                    this.props.messages.map( (message, idx) => {
+-                    return (
+-                    <div key={idx}>{message}</div>
+-                    )
+-                })
+-                }</div>
+-
+-                <div className='GRID'>{
+-                    this.props.subredditArray.map( (a) => {
+-                        return (
+-                            <Check
+-                                Url = {a.url}
+-                                onClick={this.props.submitNewMessage}
+-                                onClickToGetPost = {this.props.PostAction}
+-                                title={a.title}
+-                                description={a.description}
+-                            />
+-                        )
+-                    })
+-                }</div>
+-            </div>
+-        );
+-    }
+-}
+-
+-function mapStateToProps(state) {
+-    return {
+-        subredditArray : topicsSelectors.getTopics(state),
+-        messages : topicsSelectors.getMessages(state)
+-    };
+-}
+-
+-function mapDispatchToProps (dispatch){
+-
+-    return {
+-        submitNewMessage: (message) => {
+-            dispatch(postsActions.addMessage(message))
+-        },
+-        clearAllMessage: ()=>{
+-            dispatch({type : types.CLS})
+-        },
+-        TopicsAction : () => {
+-            dispatch(postsActions.fetchTopics())
+-        },
+-        PostAction : (Url) => {
+-            dispatch(postsActions.fetchPosts(Url))
+-        }
+-    }
+-}
+-
+-export default connect(mapStateToProps,mapDispatchToProps)(Xyinia);
+Index: src/style/basics.css
+===================================================================
+--- src/style/basics.css	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/style/basics.css	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
+@@ -1,219 +0,0 @@
+-html, body, div, span, object, iframe, h1, h2, h3, h4,
+-h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite,
+-code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub,
+-sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label,
+-legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+-details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby,
+-section, summary, time, mark, audio, video {
+-    margin: 0;
+-    padding: 0;
+-    border: 0;
+-    font-size: 110%; /*70 */
+-    vertical-align: baseline;
+-}
+-article, aside, details, figcaption, figure,
+-footer, header, hgroup, menu, nav, section {
+-    display: block; }
+-body {
+-    line-height: 1.2; }
+-
+-ol {
+-    padding-left: 1.4em;
+-    list-style: decimal; }
+-ul {
+-    padding-left: 1.4em;
+-    list-style: square;}
+-table {
+-    border-collapse: collapse;
+-    border-spacing: 0; }
+-html{
+-    background-size:100% auto;
+-    background: url('/images/fon.png') 50% 50%;
+-}
+-.left{
+-    float: left;
+-}
+-.right{
+-    float: right;
+-}
+-body{
+-    width: 90%;
+-    margin: 0 auto 0 auto;
+-    height: 100%;
+-  background:
+-         url('/images/flo.png') no-repeat local top,
+-         url('/images/floB.png') no-repeat local bottom;
+-    background-size: 90%;
+-}
+-.cap{
+-    display: flex;
+-    justify-content: space-around;
+-}
+-.centur{
+-    display: flex;
+-    justify-content: center;
+-}
+-@keyframes fadeIn {
+-    from{/* можно написать 0% */
+-        opacity: 0;
+-    }
+-    to{/* можно написать 100%*/
+-        opacity: 1;
+-    }
+-}
+-@keyframes fadeIn {
+-    from { opacity: 0; }
+-    to { opacity: 1; }
+-}
+-
+-.announcement {  animation-name: fadeIn;  animation-duration: 5s;
+-    -webkit-animation-name: fadeIn;  -webkit-animation-duration: 5s;
+-    -moz-animation-name: fadeIn;  -moz-animation-duration: 5s;
+-    -o-animation-name: fadeIn;  -o-animation-duration: 5s;
+-}
+-
+-header.cap h1{
+-    text-align: center;
+-    text-transform: uppercase ;
+-    letter-spacing: -1px;
+-    font-size: 6rem;
+-    line-height: 1.2;
+-    word-spacing: 10px;
+-}
+-
+-h1,h2,p{
+-    background: rgba(255,255,255,0.7);
+-}
+-.cap1{
+- align-items: flex-start;
+- width: auto;
+-}
+-.cap2{
+- align-items: flex-end;
+- width: auto;
+-}
+-main {
+-    width: 100%;
+-}
+-.GRID{
+-    width: 100%;
+-    display: grid;
+-    justify-items: center;
+-    grid-template-columns:repeat(auto-fit, minmax(20%, 1fr));
+-    grid-row-gap: 30px;
+-    grid-column-gap: -50px;
+-    padding-bottom: 40px;
+-}
+-.cart{
+-    align-self: center;
+-    box-sizing: border-box;
+-    height: 305px;
+-    width: 200px;
+-    box-shadow: 5px 5px 10px rgba(0,0,0,.6);
+-    object-fit: cover;
+-    background-color :grey;
+-}
+-.cart img{
+-    height: 250px;
+-    width: 200px;
+-}
+-.cart h2{
+-    font-size: 500%;
+-    height: 25px;
+-    width: 200px;
+-    text-align: center;
+-}
+-.cart:hover{
+-    transform: scale(1.1);
+-    transition-property: all;
+-    transition-duration: 500ms;
+-    transition-delay: 0s;/*отвечает за задержку после того , как увели мышку с поля */
+-}
+-.cart:not(:hover){
+-    transition-property: all;
+-    transform: scale(1.0);
+-    transition-duration: 500ms;
+-}
+-main h1{
+-    font-size: 40px;
+-}
+-.line{
+-    text-decoration: underline overline;
+-}
+-.cta{
+-    display: flex;
+-    flex-direction: row;
+-}
+-.cta button{
+-    border: 0;
+-    padding: 0;
+-    margin-top: 0;
+-    background: rgba(255,255,255,0.7);
+-    width: 100px;
+-    height: 30px;
+-    box-shadow:inset  0 0 2px 0  rgba(0,0,0,0.8);
+-}
+-.cta button:hover {
+-    box-shadow: 100px 0 0 0 rgba(255,255,255,0.8) inset;
+-}
+-header.Headhat{
+-    display: flex;
+-    align-items: center;
+-    justify-content: center;
+-    margin-top: 30px;
+-    margin-bottom: 30px;
+-    width:  auto;
+-    height: 208px;
+-}
+-
+-header.Headhat img{
+-    height: 200px;
+-    width: auto;
+-}
+-header.Headhat h1{
+-    margin: 0;
+-    border-radius: 10px;
+-}
+-footer{
+-    width: 1400px;
+-    border-top: 4px solid rgba(0,0,0,0.6);
+-    margin-left: auto;
+-    margin-right: auto;
+-    padding: 20px 0 0 0 ;
+-    text-align: center;
+-}
+-footer h3{
+-    font-size: 30px;
+-    padding-top: 20px;
+-}
+-.footerBar{
+-    width: 90%;
+-    padding-top: 20px;
+-    border-radius: 20px 20px 0 0 ;
+-    margin-left: auto;
+-    margin-right: auto;
+-    background: rgba(255,255,255,0.7);
+-}
+-.footerBar div{
+-    display: flex;
+-    justify-content: center;
+-}
+-
+-.footerBar img{
+-    width: 50px;
+-    height: 50px;
+-    padding: 10px;
+-    -webkit-filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
+-    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
+-
+-    transition-property: all;
+-    transform: scale(1.0);
+-    transition-duration: 500ms;
+-}
+-.footerBar img:hover{
+-    transform: scale(1.2);
+-    transition-property: all;
+-    transition-duration: 500ms;
+-    transition-delay: 0s;
+-}
+-
+Index: src/style/Basic.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/style/Basic.css	(date 1556403471232)
++++ src/style/Basic.css	(date 1556403471232)
+@@ -0,0 +1,63 @@
++html, body, div, span, object, iframe, h1, h2, h3, h4,
++h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite,
++code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub,
++sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label,
++legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
++details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby,
++section, summary, time, mark, audio, video {
++    margin: 0;
++    padding: 0;
++    border: 0;
++    font-size: 100%;
++    vertical-align: baseline;
++}
++article, aside, details, figcaption, figure,
++footer, header, hgroup, menu, nav, section {
++    display: block; }
++
++ul.Topics{
++    list-style: none;
++    margin: 10px;
++    background-color: #61dafb;
++}
++ul.Topics li{
++    margin-right:5px;
++    display: inline-flex;
++    position:relative;
++}
++.Check{
++   width: 110%;
++    background-color: rgba(0,0,0,0.3);
++    color: white;
++    margin: 10px 5px;
++    padding: 10px;
++    justify-items: center;
++}
++.Check + h3{
++    margin: 5px;
++}
++.Check button,input {
++    padding: 5px;
++    margin-top: 0;
++    width: auto;
++}
++input:hover {
++    background: rgba(255,255,255,1);
++}
++button:hover {
++    background: rgba(255,255,255,1);
++}
++div.GRID ,div.Footer {
++    width: auto;
++    display: grid;
++    justify-items: center;
++    grid-template-columns:repeat(auto-fit, minmax(20%, 1fr));
++    grid-row-gap: 30px;
++    grid-column-gap: -50px;
++    background-color: hotpink;
++    margin: 10px 5px;
++
++}
++div.Footer{
++    background-color: mediumspringgreen;
++}
+Index: src/store/posts/reducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/posts/reducer.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/store/posts/reducer.js	(date 1556403011248)
+@@ -1,27 +1,27 @@
+-//временная хуйня
+-//import * as types from './actionTypes';
+-//import * as postsActions from './actions';
+ import * as types from "./actionTypes";
+-import _ from 'lodash';
+ import Immutable from 'seamless-immutable';
+ const initialState = Immutable({
+     subredditArray: [],
+-    message : [],
++    PostArray : [],
+     selectedTopicUrl : undefined,
+     postsById : []
+ });
+-
+ export default function Reducer (state = initialState, action = {} ) {
+     console.log(state);
+     console.log(action);
+     switch (action.type) {
+         case types.ADD:
+             return state.merge({
+-                message: [...state.message,action.message]
++                PostArray: [...state.PostArray,action.PostArray]
+             });
++        case types.DelPost :{
++            return state.merge({
++                PostArray:  state.PostArray.filter(a => a.id !== action.id )
++            });
++        }
+         case types.CLS:
+             return state.merge({
+-                message: []
++                PostArray: []
+             });
+         case types.TOPICS_FETCHED:
+             return state.merge({
+@@ -40,13 +40,12 @@
+     }
+ }
+ // selectors
+-
+ export function getTopics(state) {
+     return state.subredditArray;
+ }
+-export function getSelectedTopicsByUrl(state) {
+-    return _.mapValues(_.keyBy(state.selectedTopicUrls), (topicUrl) => state.topicsByUrl[topicUrl]);
++export function getPostArray(state) {
++    return   state.PostArray;
+ }
+-export function getMessages(state) {
+-    return   state.message;
+-}
++export function  getAllPosts(state) {
++    return state.postsById;
++}
+\ No newline at end of file
+Index: src/components/AllPostsView.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/AllPostsView.js	(date 1555670244546)
++++ src/components/AllPostsView.js	(date 1555670244546)
+@@ -0,0 +1,15 @@
++import React from 'react';
++
++export default function  AllPostsView(props){//extends Component
++        return (
++            <div id = {props.id} className='ViewPost'>
++                <h3>{props.title}</h3>
++                <form action={props.url} target="_blank">
++                    <input type="submit" value="GoToSource"  />
++                </form>
++                {!props.thumbnail ? false :
++                    <img className="thumbnail" src={props.thumbnail} alt="thumbnail"/>
++                }
++            </div>
++        );
++}
+Index: .idea/dictionaries/lol.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/dictionaries/lol.xml	(date 1555635525245)
++++ .idea/dictionaries/lol.xml	(date 1555635525245)
+@@ -0,0 +1,3 @@
++<component name="ProjectDictionaryState">
++  <dictionary name="lol" />
++</component>
+\ No newline at end of file
+Index: src/components/Check.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Check.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/components/Check.js	(date 1556401790141)
+@@ -1,35 +1,15 @@
+-import React, { Component } from 'react';
+-import autoBind from 'react-autobind';
+-
+-export default class Check extends Component{
+-    constructor(props){
+-        super(props);
+-        autoBind(this);
+-    }
++import React from 'react';
+ 
+-    onClick(){
+-            this.props.onClick(<div>
+-                <form action={'https://www.reddit.com'+this.props.Url}>
+-
+-                    <h3>{this.props.title}</h3>
+-                    <p>{this.props.description}</p>
+-
+-                </form>
+-            </div>);
+-    }
+-    onClickToGetPost(){
+-            this.props.onClickToGetPost(this.props.Url);
+-    }
+-    render(){
++export default function Check (props){
+         return (
+-            <div>
+-                <form action={'https://www.reddit.com'+this.props.Url}>
+-                    <h3>{this.props.title}</h3>
+-                    <p>{this.props.description}</p>
+-                </form>
+-                <button onClick={this.onClick}>Submit</button>
+-                <button onClick={this.onClickToGetPost}>Get Post</button>
++            <div className="Check">
++                    <h3>{props.title}</h3>
++                <div>
++                    <form action={'https://www.reddit.com'+props.Url} target="_blank">
++                        <input type="submit" value="GoToSource"  alt="thumbnail"/>
++                    </form>
++                    <button onClick={()=>props.onClickToGetPost(props.Url)}>GetPost</button>
++                </div>
+             </div>
+         )
+-    }
+ }
+Index: src/store/posts/actionTypes.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/posts/actionTypes.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/store/posts/actionTypes.js	(date 1556402612963)
+@@ -4,3 +4,4 @@
+ export const TOPICS_FETCHED = 'TOPICS_FETCHED';
+ export const POSTS_FETCHED = 'POSTS_FETCHED';
+ export const TOPICS_SELECTED = 'TOPICS_SELECTED';
++export const DelPost = 'DelPost';
+\ No newline at end of file
+Index: package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package-lock.json	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ package-lock.json	(date 1555579478232)
+@@ -8225,6 +8225,11 @@
+         "handlebars": "^4.0.3"
+       }
+     },
++    "jQuery": {
++      "version": "1.7.4",
++      "resolved": "https://registry.npmjs.org/jQuery/-/jQuery-1.7.4.tgz",
++      "integrity": "sha1-8y3FyFpwRO6GS0RDue5F+UeLoTc="
++    },
+     "jest": {
+       "version": "23.6.0",
+       "resolved": "https://registry.npmjs.org/jest/-/jest-23.6.0.tgz",
+Index: src/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/index.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/index.js	(date 1555373435157)
+@@ -14,4 +14,5 @@
+         <App />
+     </Provider>,
+     document.getElementById('root')
+-);
+\ No newline at end of file
++);
++
+Index: src/containers/Main.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/containers/Main.js	(date 1556403744170)
++++ src/containers/Main.js	(date 1556403744170)
+@@ -0,0 +1,111 @@
++//временная хуйня
++import React, { Component } from 'react';
++import autoBind from 'react-autobind';
++import { connect } from 'react-redux';
++import '../style/Basic.css'
++import * as postsActions from "../store/posts/actions";
++import * as types from "../store/posts/actionTypes";
++import  * as topicsSelectors from "../store/posts/reducer"
++import  Check from '../components/Check'
++import AllPostsView from '../components/AllPostsView'
++
++class Xyinia extends  Component{
++    constructor(props){
++        super(props);
++        autoBind(this);
++    }
++    componentDidMount(){
++        this.props.TopicsAction();
++    }
++    AddPostLater(Post){
++        console.log(Post);
++        this.props.submitNewPost({
++            title : Post.title,
++            url : Post.url,
++            id : Post.id,
++            thumbnail: Post.thumbnail
++        });
++    }
++    render(){
++        return (
++                <div>
++                    <ul className='Topics'>{
++                        this.props.subredditArray.map( (a) => {
++                            return (
++                                    <li><Check
++                                        Url = {a.url}
++                                        onClickToGetPost = {this.props.PostAction}
++                                        title={a.title}
++                                        description={a.description}
++                                    /></li>
++                            )
++                        })
++                    }</ul>
++                    <div className="GRID">{
++                        this.props.AllPosts.map( (Post) => {
++                        return (
++                            <div>
++                            <AllPostsView
++                                title ={Post.title}
++                                url = {Post.url}
++                                id = {Post.id}
++                                thumbnail = {Post.thumbnail}
++                             />
++                              <button onClick={() => this.AddPostLater(Post)}>Add</button>
++                            </div>
++                        )
++                    })
++                    }</div>
++                    <h1><strong>-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-</strong></h1>
++                        <button onClick={this.props.clearAllPost}>CLS</button>
++                    <h1><strong>-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-</strong></h1>
++                <div className="Footer">{
++                        this.props.PostArray.map( (a) => {
++                            console.log(a);
++                            return (<div >
++                                    <h1>{a.title}</h1>
++                                    {!a.thumbnail ? false :
++                                        <img className="thumbnail" src={a.thumbnail} alt="thumbnail"/>
++                                    }
++                                    <form action={a.url} target="_blank">
++                                        <input type="submit" value="GoToSource" />
++                                    </form>
++                                    <button onClick={()=> this.props.DelPost(a.id)}>RunDry</button>
++                                </div>
++                            )
++                        })
++                }</div>
++            </div>
++        );
++    }
++}
++
++function mapStateToProps(state) {
++    return {
++        subredditArray : topicsSelectors.getTopics(state),
++        PostArray : topicsSelectors.getPostArray(state),
++        AllPosts : topicsSelectors.getAllPosts(state)
++    };
++}
++
++function mapDispatchToProps (dispatch){
++    return {
++        submitNewPost: (Post) => {
++            dispatch(postsActions.addPostArray(Post))
++        },
++        clearAllPost: ()=>{
++            dispatch({type : types.CLS})
++        },
++        TopicsAction : () => {
++            dispatch(postsActions.fetchTopics())
++        },
++        PostAction : (Url) => {
++            dispatch(postsActions.fetchPosts(Url))
++        },
++        DelPost : (id) =>{
++            dispatch({type : types.DelPost , id : id})
++        }
++    }
++}
++
++export default connect(mapStateToProps,mapDispatchToProps)(Xyinia);
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/App.js	(date 1555578681046)
+@@ -2,14 +2,14 @@
+ //import logo from './logo.svg';
+ import './App.css';
+ import { connect } from 'react-redux';
+-import  Xyinia from './containers/Xyinia';
++import  Main from './containers/Main';
+ //import connect from "react-redux/es/connect/connect";
+ //import * as postsSelectors from "./store/posts/reducer";
+ class App extends Component {
+   render() {
+     return (
+       <div className="App">
+-            <Xyinia/>
++            <Main/>
+           <h1>-_-_-_-_-_-_-_-_-_-_-_-_</h1>
+       </div>
+     );
+Index: src/services/reddit.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/services/reddit.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/services/reddit.js	(date 1555578751016)
+@@ -1,13 +1,7 @@
+-// services are state-less
+-// they act as utility facades that abstract the details for complex operations
+-// normally, our interface to any sort of server API will be as a service
+-
+ import _ from 'lodash';
+-
+ const REDDIT_ENDPOINT = 'https://www.reddit.com';
+ 
+ class RedditService {
+-
+     async getDefaultSubreddits() {
+         const url = `${REDDIT_ENDPOINT}/subreddits/default.json`; // default.json
+         const response = await fetch(url, {
+@@ -25,7 +19,6 @@
+             throw new Error(`RedditService getDefaultSubreddits failed, children not returned`);
+         }
+         const sortedBySubscribers = _.orderBy(children, 'data.subscribers', 'desc');
+-
+         return _.map(sortedBySubscribers, (subreddit) => {
+             // abstract away the specifics of the reddit API response and take only the fields we care about
+             return {
+@@ -52,7 +45,6 @@
+         if (!children) {
+             throw new Error(`RedditService getPostsFromSubreddit failed, children not returned`);
+         }
+-        console.log( children );
+         //выбираем что конкретно хотим забрать от reddita
+         return _.map(children, (post) => {
+             // abstract away the specifics of the reddit API response and take only the fields we care about
+@@ -67,7 +59,6 @@
+             }
+         });
+     }
+-
+     _validateUrl(url = '') {
+         return url.startsWith('http') ? url : undefined;
+     }
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ package.json	(date 1555579477933)
+@@ -3,6 +3,7 @@
+   "version": "0.1.0",
+   "private": true,
+   "dependencies": {
++    "jQuery": "^1.7.4",
+     "lodash": "^4.17.11",
+     "react": "^16.8.6",
+     "react-autobind": "^1.0.6",
+Index: public/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- public/index.html	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ public/index.html	(date 1556405338109)
+@@ -9,31 +9,9 @@
+         content="width=device-width, initial-scale=1, shrink-to-fit=no"
+       />
+       <meta name="theme-color" content="#000000" />
+-      <!--
+-        manifest.json provides metadata used when your web app is installed on a
+-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+ 
+-        manifest.json предоставляет метаданные, используемые при установке веб-приложения на
+-        мобильное устройство пользователя или рабочий стол. См. Https://developers.google.com/web/fundamentals/web-app-manifest/.
+-      -->
+      <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+-     <!--
+-       Notice the use of %PUBLIC_URL% in the tags above.
+-       It will be replaced with the URL of the `public` folder during the build.
+-       Only files inside the `public` folder can be referenced from the HTML.
+-
+-       Обратите внимание на использование% PUBLIC_URL% в тегах выше.
+-       Он будет заменен URL-адресом папки `public` во время сборки.
+-       Только файлы внутри папки `public` могут ссылаться из HTML.
+ 
+-       Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+-       work correctly both with client-side routing and a non-root public URL.
+-       Learn how to configure a non-root public URL by running `npm run build`.
+-
+-       В отличие от "/favicon.ico" или "favicon.ico", "% PUBLIC_URL% / favicon.ico" будет
+-       работать корректно как с маршрутизацией на стороне клиента, так и с общедоступным URL без полномочий root.
+-       Узнайте, как настроить общедоступный URL без полномочий root, запустив `npm run build`.
+-     -->
+      <title>React App</title>
+ 
+     <link href="../src/style/basics.css" rel="stylesheet" type="text/css">
+@@ -41,39 +19,11 @@
+    <body>
+ 
+    <div id="root"></div>
+-     <!--<header class="cap announcement">
+-       <h1 class="cap1">Hello, World!</h1>
+-       <h1 class="cap2">first try</h1>
+-     </header>
+-     <main>
+-       <header class="Headhat">
+-         <img src="/images/A.png" class="announcement" style=" filter: drop-shadow(-7px 5px 7px rgba(0,0,0,.9));">
+-         <h1 class="line">TVUBYIUlkjcgфцывапрооvhkjblkhjl'l;khljkvhjghJN</h1>
+-         <img src="/images/B.png" class="announcement" style=" filter: drop-shadow(7px 5px 8px rgba(0,0,0,1.0));">
+-       </header>
+-       <div class="GRID">
+-         <script type="text/javascript" src="../src/index.js" async></script>
+-     <!--
+-       This HTML file is a template.
+-       If you open it directly in the browser, you will see an empty page.
++       <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
++       <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+ 
+-       You can add webfonts, meta tags, or analytics to this file.
+-       The build step will place the bundled scripts into the <body> tag.
++       <!-- Load our React component. -->
++       <script src="/src/index.js"></script>
+ 
+-       To begin the development, run `npm start` or `yarn start`.
+-       To create a production bundle, use `npm run build` or `yarn build`.
+-     -->
+-     <!-- </div>
+-      <footer >
+-        <div class="footerBar">
+-          <h3 class="line">Для связи со мной</h3>
+-          <div>
+-            <a href="https://vk.com/id230124085" ><img src="/images/vk-logo.png" class="VK"></a>
+-            <a href="https://www.instagram.com/semen_lypin/"><img src="/images/inst-logo.png" class="inst"></a>
+-            <a href="https://web.tlgrm.eu/#/im?p=@lur1e"><img src="/images/tel-logo.png" class="telegram"></a>
+-          </div>
+-        </div>
+-      </footer>
+-    </main>-->
+   </body>
+ </html>
+Index: src/store/posts/actions.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/store/posts/actions.js	(revision 145f315c883d3a76a5755f2c13662b0e171de5c5)
++++ src/store/posts/actions.js	(date 1555539524769)
+@@ -3,10 +3,10 @@
+ import _ from 'lodash';
+ import redditService from '../../services/reddit';
+ 
+-export function addMessage(message){
++export function addPostArray(PostArray){
+     return {
+         type:  types.ADD,
+-         message
++        PostArray
+     }
+ }
+ export function fetchTopics() {
+@@ -25,12 +25,9 @@
+             console.log(selectedTopicUrl);
+             dispatch({ type: types.TOPICS_SELECTED, selectedTopicUrl});
+             const fetchPromises =  [redditService.getPostsFromSubreddit(selectedTopicUrl)];
+-            console.log(fetchPromises);
+             const topicPosts = await Promise.all(fetchPromises);
+-            console.log(topicPosts);
+-            const postsById = _.keyBy(_.shuffle(_.flatten(topicPosts)), (post) => post.id);
+-            console.log(postsById);
+-            dispatch({ type: types.POSTS_FETCHED, postsById });
++            const postsById = Object.values(_.keyBy(_.shuffle(_.flatten(topicPosts)), (post) => post.id));
++            dispatch({ type: types.POSTS_FETCHED,  postsById  });
+         } catch (error) {
+             console.error(error);
+         }

@@ -4,13 +4,14 @@ const initialState = Immutable({
     subredditArray: [],
     PostArray : [],
     selectedTopicUrl : undefined,
-    postsById : []
+    postsById : [],
+    isExit : false
 });
 export default function Reducer (state = initialState, action = {} ) {
     switch (action.type) {
         case types.ADD:
             return state.merge({
-                PostArray: [...state.PostArray,action.PostArray]
+                PostArray: [ ...state.PostArray, action.PostArray ]
             });
         case types.DelPost :{
             return state.merge({
@@ -32,6 +33,10 @@ export default function Reducer (state = initialState, action = {} ) {
         case types.TOPICS_SELECTED:
             return state.merge({
                 selectedTopicUrl: action.selectedTopicUrl
+            });
+        case types.EXIT : 
+            return state.merge({
+                isExit :  !state.isExit
             });
         default:
             return state;

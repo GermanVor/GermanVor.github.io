@@ -1,15 +1,14 @@
 import React from 'react';
 
-export default function  AllPostsView(props){//extends Component
-        return (
-            <div id = {props.id} className='ViewPost'>
-                <h3>{props.title}</h3>
-                <form action={props.url} target="_blank">
+export default  ( { id, title, url, thumbnail, AddPostLater } ) => (
+            <div id = {id} className='ViewPost'>
+                <h3>{title}</h3>
+                <form action={url} target="_blank">
                     <input type="submit" value="GoToSource"  />
-                </form>
-                {!props.thumbnail ? false :
-                    <img className="thumbnail" src={props.thumbnail} alt="thumbnail"/>
+                </form>{
+                    !thumbnail ? false :
+                    <img className="thumbnail" src={thumbnail} alt="thumbnail"/>
                 }
+                <button onClick={() => AddPostLater({ id, title, url, thumbnail, AddPostLater }) }>Add</button>
             </div>
-        );
-}
+)

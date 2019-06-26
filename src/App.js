@@ -1,19 +1,71 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import  Main from './containers/Main';
-//import connect from "react-redux/es/connect/connect";
-//import * as postsSelectors from "./store/posts/reducer";
+import {
+  Home,
+  About,
+  Contact,
+  Whoops404
+} from './components/mapMenu';
+import {
+  HashRouter,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom';
+const logo = require('./style/me.jpg');
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-            <Main/>
-          <h1>-_-_-_-_-_-_-_-_-_-_-_-_</h1>
+             <button onClick = { () => this.props.exit() }>
+                {this.props._exit ? 'Visitca':'Bomsh React-Redux proect' }
+             </button>
+             <br/>
+              { this.props._exit ? 
+              <Main/> : 
+              <div>
+                <img class="fit-picture" src={logo} alt="German Vor" className='me'/>
+                <br/>
+                <h className='header'> Ceated by German Vorotnikov </h>
+                  <HashRouter>
+                  <div style={{clear:'both', marginTop: '20px'}}></div>
+                  <aside>
+                    <nav>
+                      <ul>
+                        <li><Link to='/'>Home</Link></li>
+                        <li><Link to='/about'>About</Link></li>
+                        <li><Link to='/contact'>Contact</Link></li>
+                      </ul>
+                    </nav>
+                  </aside>
+                  <main>
+                      <Switch>
+                        <Route exact path='/' component={Home}/>
+                        <Route path="/about" component={About}/>
+                        <Route path="/contact" component={Contact}/>
+                        <Route component={Whoops404} />
+                      </Switch>
+                  </main>
+                  </HashRouter>
+              </div> }
       </div>
     );
   }
 }
 
-export default connect(undefined,undefined)(App);
+function mapStateToProps(state) {
+  return {
+      _exit : state.isExit 
+  };
+}
+function mapDispatchToProps (dispatch){
+  return {
+      exit : () => {
+          dispatch( { type : "EXIT" } )
+      }
+  }
+}
+export default connect( mapStateToProps, mapDispatchToProps )(App);

@@ -15,6 +15,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block; }
 
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
 ul.Topics{
     list-style: none;
     margin: 10px;
@@ -26,7 +29,6 @@ ul.Topics li{
     position:relative;
 }
 .Check{
-    width: 110%;
     background-color: rgba(0,0,0,0.3);
     color: white;
     margin: 10px 5px;
@@ -60,4 +62,7 @@ div.GRID ,div.Footer {
 }
 div.Footer{
     background-color: mediumspringgreen;
+}
+.ViewPost {
+    background-color: rgba(0,0,0,0.3)
 }

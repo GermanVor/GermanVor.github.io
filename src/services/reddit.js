@@ -47,7 +47,6 @@ class RedditService {
         }
         //выбираем что конкретно хотим забрать от reddita
         return _.map(children, (post) => {
-            // abstract away the specifics of the reddit API response and take only the fields we care about
             const body = _.get(post, 'data.selftext');
             return {
                 id: _.get(post, 'data.id'),
@@ -57,7 +56,7 @@ class RedditService {
                 thumbnail: this._validateUrl(_.get(post, 'data.thumbnail')),
                 url: !body ? this._validateUrl(_.get(post, 'data.url')) : undefined
             }
-        });
+        })
     }
     _validateUrl(url = '') {
         return url.startsWith('http') ? url : undefined;
