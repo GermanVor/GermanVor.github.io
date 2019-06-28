@@ -10,7 +10,7 @@ main {
   border-bottom: 3px solid #3d7e9a; 
  }
  
- aside {
+ nav {
   float: left;
   box-shadow: inset 50px 0 50px -50px #29627e;
   font-style: italic;
@@ -18,7 +18,7 @@ main {
   background-color: white;
   
 }
-aside ul{
+nav ul{
   font-size: 1.8em; /* Размер текста */
   margin: 0 25px 0 200px ;
 }

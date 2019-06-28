@@ -31,13 +31,13 @@ class App extends Component {
                 <h className='header'> Ceated by German Vorotnikov </h>
                   <HashRouter>
                   <div style={{clear:'both', marginTop: '20px'}}></div>
-                  <aside>
+                  <nav>
                       <ul>
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/about'>About</Link></li>
                         <li><Link to='/contact'>Contact</Link></li>
                       </ul>
-                  </aside>
+                  </nav>
                   <main>
                       <Switch>
                         <Route exact path='/' component={Home}/>
