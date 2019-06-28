@@ -23,7 +23,6 @@ class App extends Component {
              <button onClick = { () => this.props.exit() }>
                 {this.props._exit ? 'Visitca':'Bomsh React-Redux proect' }
              </button>
-             <br/>
               { this.props._exit ? 
               <Main/> : 
               <div>
@@ -33,13 +32,11 @@ class App extends Component {
                   <HashRouter>
                   <div style={{clear:'both', marginTop: '20px'}}></div>
                   <aside>
-                    <nav>
                       <ul>
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/about'>About</Link></li>
                         <li><Link to='/contact'>Contact</Link></li>
                       </ul>
-                    </nav>
                   </aside>
                   <main>
                       <Switch>

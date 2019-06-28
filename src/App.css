@@ -16,8 +16,9 @@ main {
   font-style: italic;
   color: #29627e;
   background-color: white;
+  
 }
-aside nav {
+aside ul{
   font-size: 1.8em; /* Размер текста */
   margin: 0 25px 0 200px ;
 }
