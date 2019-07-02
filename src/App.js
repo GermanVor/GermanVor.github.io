@@ -27,8 +27,8 @@ class App extends Component {
               <Main/> : 
               <div>
                 <img class="fit-picture" src={logo} alt="German Vor" className='me'/>
-                <br/>
-                <h className='header'> Ceated by German Vorotnikov </h>
+                <div></div>
+                <h className='header'> Created by German Vorotnikov </h>
                   <HashRouter>
                   <div style={{clear:'both', marginTop: '20px'}}></div>
                   <nav>
