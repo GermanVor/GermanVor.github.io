@@ -23,12 +23,13 @@ class App extends Component {
              <button onClick = { () => this.props.exit() }>
                 {this.props._exit ? 'Visitca':'Bomsh React-Redux proect' }
              </button>
+             <div></div>
               { this.props._exit ? 
               <Main/> : 
-              <div>
-                <img class="fit-picture" src={logo} alt="German Vor" className='me'/>
+              <div className='Visitca'>
+                <img src={logo} alt="German Vor" className='me'/>
                 <div></div>
-                <h className='header'> Created by German Vorotnikov </h>
+                <h className='signature'> Created by German Vorotnikov </h>
                   <HashRouter>
                   <div style={{clear:'both', marginTop: '20px'}}></div>
                   <nav>

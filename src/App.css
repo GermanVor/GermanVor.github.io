@@ -3,28 +3,53 @@ main {
   margin:  0 55px ; /* Выравниваем по центру */
   font-size: 1.45em;
  }
- .header { 
+ .signature{ 
   font-size: 2.2em; /* Размер текста */
   text-align: center; /* Выравнивание по центру */
   padding: 5px; /* Отступы вокруг текста */
   border-bottom: 3px solid #3d7e9a; 
+  background: rgba(255,255,255,0.7);
  }
- 
+
+.line{
+  text-decoration: underline overline;
+}
+ div.Headhat{
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.Headhat img{
+  height: 200px;
+  width: auto;
+}
+div.Headhat h1{
+  margin: 0;
+  border-radius: 10px;
+}
+
  nav {
   float: left;
-  box-shadow: inset 50px 0 50px -50px #29627e;
   font-style: italic;
   color: #29627e;
-  background-color: white;
-  
 }
 nav ul{
   font-size: 1.8em; /* Размер текста */
   margin: 0 25px 0 200px ;
 }
+nav li a{
+  padding: 0 5px ;
+}
+nav li a:hover{
+  background-color: #794fdb;
+}
+
 img.me{
   width: 20%;
     height: auto;
+    border: 2px solid rgb(10, 60, 75);
 }
  
 section p{
@@ -32,17 +57,18 @@ section p{
   padding-bottom: 15px;
   margin: 10px 0 25px;
 
-  background-color: rgba(40, 160, 138, 0.2);
+  background-color: rgba(249, 223, 255, 0.7);
   padding: 7px;
 }
 
 section h1{
   padding: 25px 0;
   font-size: 2.2em;
+  text-align : center;
 }
 
 section h2{
-  margin-left: 7px;
+  padding-left: 7px;
 }
 .footerBar{
   display: flex;
@@ -64,4 +90,23 @@ section h2{
   transition-property: all;
   transition-duration: 500ms;
   transition-delay: 0s;
+}
+a:link {
+  color: rgb(0, 0, 0); 
+}
+
+a:hover {
+  color: rgb(255, 255, 255); 
+}
+a:active {
+  color: rgb(255, 118, 244); 
+}
+.Visitca h1{
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.Visitca h2{
+  background-color: rgba(255, 255, 255, 0.6);
+}
+.Visitca h3{
+  background-color: rgba(255, 255, 255, 0.6);
 }

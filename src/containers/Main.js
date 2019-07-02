@@ -38,7 +38,7 @@ class Xyinia extends  Component{
     }
     render(){
         return (
-                <div>
+                <div className='ReactMain'>
                     <Topics
                         subredditArray = {this.props.subredditArray}
                         CheckWrapper = {this.CheckWrapper}
@@ -95,13 +95,3 @@ function mapDispatchToProps (dispatch){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Xyinia);
-{/* <div >
-                                    <h1>{a.title}</h1>
-                                    {!a.thumbnail ? false :
-                                        <img className="thumbnail" src={a.thumbnail} alt="thumbnail"/>
-                                    }
-                                    <form action={a.url} target="_blank">
-                                        <input type="submit" value="GoToSource" />
-                                    </form>
-                                    <button onClick={ () => this.props.DelPost(a.id) }>RunDry</button>
-                                </div> */}

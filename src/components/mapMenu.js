@@ -2,7 +2,7 @@ import React  from 'react';
 
 export const Home  = () =>
     <section className='home'>
-        <h1>Home</h1>
+        <h1 className='line'>Home</h1>
         <p>
 <strong>Дальше следует абсолютный информациионый шум , я сам его не читал !</strong><br/>
 Значимость этих проблем настолько очевидна, что курс на социально-ориентированный национальный 
@@ -31,13 +31,13 @@ export const Home  = () =>
 
 export const About = ()=>
     <section className='about'>
-        <h1>About</h1>
+        <h1 className='line'>About</h1>
     </section>
 
 
 export const Contact = ()=>
     <section className='contact'>
-        <h1>Для связи со мной</h1>
+        <h1 className='line'>Для связи со мной</h1>
         <p>https://vk.com/im?sel=263370028</p>
         <p>https://www.instagram.com/semen_lypin/</p>
         <p>https://web.tlgrm.eu/#/im?p=@lur1e</p>

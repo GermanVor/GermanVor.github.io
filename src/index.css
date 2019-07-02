@@ -12,3 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+html{
+  background-image: url('../src/style/fon.png');
+  background-size:100% auto;
+  background-position: 50% 50%
+}
+body{
+  margin: 0 auto 0 auto;
+  height: 100%;
+  background: url('../src/style/flo.png') no-repeat local top;
+  background-size: 90%;
+}
