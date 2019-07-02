@@ -20,15 +20,14 @@ class BodyGrid  extends  Component{
         });
     }
     shouldComponentUpdate(nextProps){
-        console.dir(nextProps.AllPosts);
         return !_.isEqual(nextProps.AllPosts, this.props.AllPosts );
     }
     render(){
         return (
-            <div className="GRID"> {
-                this.props.AllPosts.map( (Post) => {
+            <div className="GRID"> 
+               <ul> {this.props.AllPosts.map( (Post) => {
                     return (
-                        <div>
+                        <li>
                         <AllPostsView
                             title ={Post.title}
                             url = {Post.url}
@@ -36,10 +35,11 @@ class BodyGrid  extends  Component{
                             thumbnail = {Post.thumbnail}
                             AddPostLater = {this.AddPostLater}
                          />
-                        </div>
+                        </li>
                     )
                 })
-            }</div>  
+            }</ul>
+        </div>  
         );
     }
 }

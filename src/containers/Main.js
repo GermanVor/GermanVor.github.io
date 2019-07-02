@@ -8,6 +8,7 @@ import  * as topicsSelectors from "../store/posts/reducer"
 import  Check from '../components/Check'
 import Topics from '../components/Topics'
 import BodyGrid from '../components/BodyGrid'
+import FooterPostView from '../components/FooterPostView'
 
 class Xyinia extends  Component{
     constructor(props){
@@ -46,21 +47,19 @@ class Xyinia extends  Component{
                     <h1><strong>-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-</strong></h1>
                         <button onClick={this.props.clearAllPost}>CLS</button>
                     <h1><strong>-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-</strong></h1>
-                <div className="Footer">{
+                <div className="Footer">
+                <ul>{
                         this.props.PostArray.map( (a) => {
-                            return (<div >
-                                    <h1>{a.title}</h1>
-                                    {!a.thumbnail ? false :
-                                        <img className="thumbnail" src={a.thumbnail} alt="thumbnail"/>
-                                    }
-                                    <form action={a.url} target="_blank">
-                                        <input type="submit" value="GoToSource" />
-                                    </form>
-                                    <button onClick={ () => this.props.DelPost(a.id) }>RunDry</button>
-                                </div>
+                            return (<li><FooterPostView
+                                id = {a.id}
+                                title = {a.title}
+                                url = {a.url}
+                                thumbnail = {a.thumbnail}
+                                DelPost = {this.props.DelPost}
+                            /></li>
                             )
                         })
-                }</div>
+                }</ul></div>
 
             </div>
         );
@@ -96,3 +95,13 @@ function mapDispatchToProps (dispatch){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Xyinia);
+{/* <div >
+                                    <h1>{a.title}</h1>
+                                    {!a.thumbnail ? false :
+                                        <img className="thumbnail" src={a.thumbnail} alt="thumbnail"/>
+                                    }
+                                    <form action={a.url} target="_blank">
+                                        <input type="submit" value="GoToSource" />
+                                    </form>
+                                    <button onClick={ () => this.props.DelPost(a.id) }>RunDry</button>
+                                </div> */}

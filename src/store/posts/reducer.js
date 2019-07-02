@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import Immutable from 'seamless-immutable';
+
 const initialState = Immutable({
     subredditArray: [],
     PostArray : [],
@@ -9,10 +10,12 @@ const initialState = Immutable({
 });
 export default function Reducer (state = initialState, action = {} ) {
     switch (action.type) {
-        case types.ADD:
-            return state.merge({
-                PostArray: [ ...state.PostArray, action.PostArray ]
-            });
+        case types.ADD: {
+                return state.merge({
+                    PostArray:  state.PostArray.every( (a) => a.id !== action.PostArray.id) ?
+                    [ ...state.PostArray, action.PostArray ]  : state.PostArray 
+                });
+        }
         case types.DelPost :{
             return state.merge({
                 PostArray:  state.PostArray.filter(a => a.id !== action.id )
