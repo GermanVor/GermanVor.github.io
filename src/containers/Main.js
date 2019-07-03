@@ -43,10 +43,11 @@ class Xyinia extends  Component{
                         subredditArray = {this.props.subredditArray}
                         CheckWrapper = {this.CheckWrapper}
                     />
-                    <BodyGrid />
-                    <h1><strong>-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-</strong></h1>
-                        <button onClick={this.props.clearAllPost}>CLS</button>
-                    <h1><strong>-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-</strong></h1>
+                
+                <BodyGrid />
+
+                {this.props.PostArray.length ? <button onClick={this.props.clearPostArray}>CLS</button>:<div/>}
+
                 <div className="Footer">
                 <ul>{
                         this.props.PostArray.map( (a) => {
@@ -70,7 +71,6 @@ function mapStateToProps(state) {
     return {
         subredditArray : topicsSelectors.getTopics(state),
         PostArray : topicsSelectors.getPostArray(state),
-        AllPosts : topicsSelectors.getAllPosts(state)
     };
 }
 
@@ -79,8 +79,8 @@ function mapDispatchToProps (dispatch){
         submitNewPost: (Post) => {
             dispatch(postsActions.addPostArray(Post))
         },
-        clearAllPost: ()=>{
-            dispatch( {type : types.CLS} )
+        clearPostArray: ()=>{
+            dispatch( {type : types.CLS_PostArray} )
         },
         TopicsAction : () => {
             dispatch(postsActions.fetchTopics())

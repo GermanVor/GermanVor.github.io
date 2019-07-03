@@ -21,10 +21,14 @@ export default function Reducer (state = initialState, action = {} ) {
                 PostArray:  state.PostArray.filter(a => a.id !== action.id )
             });
         }
-        case types.CLS:
+        case types.CLS_PostArray:
             return state.merge({
                 PostArray: []
             });
+        case types.CLS_postsById:
+            return state.merge({
+                postsById: []
+            });  
         case types.TOPICS_FETCHED:
             return state.merge({
                 subredditArray: action.subredditArray

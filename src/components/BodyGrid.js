@@ -23,8 +23,10 @@ class BodyGrid  extends  Component{
         return !_.isEqual(nextProps.AllPosts, this.props.AllPosts );
     }
     render(){
-        return (
+        return (<div>
+            {this.props.AllPosts.length ? <button onClick={this.props.clearPostsById}>CLS</button>:<div/>}
             <div className="GRID"> 
+               
                <ul> {this.props.AllPosts.map( (Post) => {
                     return (
                         <li>
@@ -40,6 +42,7 @@ class BodyGrid  extends  Component{
                 })
             }</ul>
         </div>  
+        </div>
         );
     }
 }
@@ -55,6 +58,9 @@ function mapDispatchToProps (dispatch){
         submitNewPost: (Post) => {
             dispatch(postsActions.addPostArray(Post))
         },
+        clearPostsById: () => {
+            dispatch( {type : 'CLS_postsById'} )
+        }
     }
 }
 
