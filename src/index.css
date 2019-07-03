@@ -23,3 +23,6 @@ body{
   background: url('../src/style/flo.png') no-repeat local top;
   background-size: 90%;
 }
+html{
+  overflow-y:scroll;
+}
