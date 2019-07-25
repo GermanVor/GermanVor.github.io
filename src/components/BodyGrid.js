@@ -11,6 +11,17 @@ class BodyGrid  extends  Component{
         super(props);
         autoBind(this);
     }
+    componentDidMount(){
+        var LocalPostArray = JSON.parse(localStorage.getItem("LocalPostArray")) ;
+        if(LocalPostArray){
+            LocalPostArray.forEach( a => this.props.submitNewPost({
+                title : a.title,
+                url : a.url,
+                id : a.id,
+                thumbnail: a.thumbnail
+            }) )
+        }
+    }
     AddPostLater(Post){
         this.props.submitNewPost({
             title : Post.title,

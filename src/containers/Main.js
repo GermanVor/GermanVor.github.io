@@ -68,6 +68,7 @@ class Xyinia extends  Component{
 }
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
         subredditArray : topicsSelectors.getTopics(state),
         PostArray : topicsSelectors.getPostArray(state),

@@ -8,20 +8,25 @@ const initialState = Immutable({
     postsById : [],
     isExit : false
 });
+
 export default function Reducer (state = initialState, action = {} ) {
     switch (action.type) {
         case types.ADD: {
-                return state.merge({
-                    PostArray:  state.PostArray.every( (a) => a.id !== action.PostArray.id) ?
-                    [ ...state.PostArray, action.PostArray ]  : state.PostArray 
-                });
+            if(state.PostArray.every( (a) => a.id !== action.PostArray.id)){
+            AddLocalPostArray(action.PostArray)
+            return state.merge({
+                PostArray: [ ...state.PostArray, action.PostArray ]
+            });
+            }
         }
         case types.DelPost :{
+            DelLocalPostArray(action.id)
             return state.merge({
                 PostArray:  state.PostArray.filter(a => a.id !== action.id )
             });
         }
         case types.CLS_PostArray:
+            localStorage.clear()
             return state.merge({
                 PostArray: []
             });
@@ -58,4 +63,17 @@ export function getPostArray(state) {
 }
 export function  getAllPosts(state) {
     return state.postsById;
+}
+
+function AddLocalPostArray(obj){
+    var LocalPostArray = JSON.parse(localStorage.getItem("LocalPostArray")) || [];
+    LocalPostArray.push(obj)
+    localStorage.removeItem("LocalPostArray");
+    localStorage.setItem("LocalPostArray", JSON.stringify(LocalPostArray));
+}
+
+function DelLocalPostArray(id){
+    var LocalPostArray = JSON.parse(localStorage.getItem("LocalPostArray")) || [];
+    LocalPostArray =   LocalPostArray.filter(a => a.id !== id )
+    localStorage.setItem("LocalPostArray", JSON.stringify(LocalPostArray));
 }

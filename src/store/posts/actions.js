@@ -26,7 +26,6 @@ export function fetchPosts(selectedTopicUrl) {
             const fetchPromises =  [redditService.getPostsFromSubreddit(selectedTopicUrl)];
             const topicPosts = await Promise.all(fetchPromises);
             const postsById = Object.values(_.keyBy(_.shuffle(_.flatten(topicPosts)), (post) => post.id)).sort( (a, b) => a.id > b.id ? 1 : -1 );
-            console.dir(postsById )
             dispatch({ type: types.POSTS_FETCHED,  postsById  });
         } catch (error) {
             console.error(error);
