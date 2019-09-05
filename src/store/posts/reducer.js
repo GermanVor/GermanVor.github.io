@@ -18,7 +18,7 @@ export default function Reducer (state = initialState, action = {} ) {
                 PostArray: [ ...state.PostArray, action.PostArray ]
             });
             }
-        }
+        }// eslint-disable-next-line
         case types.DelPost :{
             DelLocalPostArray(action.id)
             return state.merge({
