@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
              <button onClick = { () => this.props.exit() }>
-                {this.props._exit ? 'Visitca':'Bomsh React-Redux proect' }
+                {this.props._exit ? 'Visitca':'React-Redux proect' }
              </button>
              <div></div>
               { this.props._exit ? 

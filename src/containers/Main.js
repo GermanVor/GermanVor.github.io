@@ -10,7 +10,7 @@ import Topics from '../components/Topics'
 import BodyGrid from '../components/BodyGrid'
 import FooterPostView from '../components/FooterPostView'
 
-class Xyinia extends  Component{
+class Main extends  Component{
     constructor(props){
         super(props);
         autoBind(this);
@@ -95,4 +95,4 @@ function mapDispatchToProps (dispatch){
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Xyinia);
+export default connect(mapStateToProps,mapDispatchToProps)(Main);
