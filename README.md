@@ -10,5 +10,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 К тому же  были использованы дополнительные библиотеки 
 
-С сайто можно ознакомиться пройдя по ссылке [GermanVor](https://quizzical-sinoussi-351dcc.netlify.com)
+С сайтом можно ознакомиться пройдя по ссылке [GermanVor](https://quizzical-sinoussi-351dcc.netlify.com)
 
