@@ -110,3 +110,23 @@ a:active {
 .Visitca h3{
   background-color: rgba(255, 255, 255, 0.6);
 }
+button {
+  display:inline-block;
+  padding: 0.2em 1.45em;
+  margin:0.1em;
+  border:0.15em solid #CCCCCC;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Segoe UI','Roboto',sans-serif;
+  font-weight:400;
+  color:#000000;
+  background-color:rgb(255, 253, 132);
+  text-align:center;
+  position:relative;
+}
+button:hover{
+  border-color:#ecee68;
+}
+button:active{
+  background-color:#a7b652;
+}

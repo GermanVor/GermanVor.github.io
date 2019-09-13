@@ -18,17 +18,15 @@ footer, header, hgroup, menu, nav, section {
 li {
     list-style-type: none; /* Убираем маркеры */
 }
-ul.Topics{
-    
+ul.Topics{ 
     text-align: center;
     display: inline-block;
     border-radius: 5px;
-    padding: 15px 35px;
     font-size: 22px;
     text-decoration: none;
     color: white;
     background: #55acee;
-    box-shadow: 0 5px 0 #3C93D5;
+    box-shadow: -5px -5px #3C93D5;
     margin: 10px;
     background-color: #61dafb;
 }
@@ -38,12 +36,31 @@ ul.Topics li{
     position:relative;
 }
 .Check{
+    border-radius: 20% ;
     background-color: rgba(0,0,0,0.3);
     color: white;
     margin: 10px 5px;
     padding: 10px;
     justify-items: center;
 }
+.Topics input{
+    font-weight: 700;
+    border-radius: 2%;
+    background-color: rgb(81, 218, 145);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 0 rgb(25, 145, 81);
+    margin: 5px 10px ;
+}
+.Topics input:hover {
+    background-color: rgb(76, 243, 154); /* Green */
+}
+.Topics input:active  {
+    background-color: rgb(13, 212, 106); /* Green */
+}
+
 .Check + h3{
     margin: 5px;
 }
@@ -52,22 +69,23 @@ ul.Topics li{
     margin-top: 0;
     width: auto;
 }
-input:hover {
-    background: rgba(255,255,255,1);
-}
-button:hover {
-    background: rgba(255,255,255,1);
-}
+
 div.GRID {
     width: auto;
     background-color: hotpink;
     margin: 10px 5px;
+    border-radius: 5px;
+    font-size: 22px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 5px 5px 0 rgb(173, 25, 99);
+    margin: 10px;
 }
 
 div.GRID ul li{
     display: inline-block;
     list-style: none;
-    margin: 5px;
+    margin: 10px 5px;
     border: 2px solid rgb(10, 60, 75);
     vertical-align: middle;
     width: 200px;
@@ -75,6 +93,9 @@ div.GRID ul li{
  
 div.Footer{
     background-color: mediumspringgreen;
+    box-shadow: 5px -5px 0 0 rgb(8, 143, 71);
+    margin: 10px;
+    border-radius: 5px;
 }
 div.Footer ul li{
     display: inline-block;
@@ -86,10 +107,52 @@ div.Footer ul li{
     
 }
 div.ViewPost {
+    border-radius: 3px;
     background-color: rgba(0,0,0,0.2);
     margin: 10px;
+    padding: 10px
+}
+div.ViewPost input {
+    font-weight: 700;
+    border-radius: 2%;
+    background-color: #55a7e6;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 0 #3C93D5;
+    margin: 5px 10px ; 
+    
+} 
+.ViewPost input:hover {
+    background-color:#5bb6fc;   
+}
+.ViewPost input:active  {
+    background-color: #448dc5;  
 }
 div.FooterPostView {
+    font-weight: 700;
+    border-radius: 2%;
+    color: white;
     margin: 10px;
     background-color: rgba(0,0,0,0.2);
+    padding: 10px;
+}
+.FooterPostView input {
+    font-weight: 700;
+    border-radius: 2%;
+    background-color: #cc5490;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 0 #ad1963;
+    margin: 5px 10px ; 
+    
+} 
+.FooterPostView input:hover {
+    background-color:#ff69b4;   
+}
+.FooterPostView input:active  {
+    background-color: #ad1963;  
 }

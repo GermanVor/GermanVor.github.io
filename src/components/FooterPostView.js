@@ -9,6 +9,6 @@ export default  ( { id, title, url, thumbnail, DelPost } ) => (
                     <form action={url} target="_blank">
                         <input type="submit" value="GoToSource" />
                     </form>
-                    <button onClick={ () => DelPost(id) }>RunDry</button>
+                    <input type="submit" value="RunDry" onClick={ () => DelPost(id) }/>
             </div>
 )

@@ -11,6 +11,6 @@ export default  ( { id, title, url, thumbnail, AddPostLater } ) => (
                     <img className="thumbnail" src={thumbnail} alt="thumbnail"/>
                 }
                 <div></div>
-                <button onClick={() => AddPostLater({ id, title, url, thumbnail, AddPostLater }) }>Add</button>
+                <input type="submit" value="Add" onClick={() => AddPostLater({ id, title, url, thumbnail, AddPostLater }) }/>
             </div>
 )
