@@ -12,3 +12,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 С сайтом можно ознакомиться пройдя по ссылке [GermanVor](https://quizzical-sinoussi-351dcc.netlify.com)
 
+Чтобы запустить - npm start в главной директории 
