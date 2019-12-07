@@ -11,16 +11,19 @@ class BodyGrid  extends  Component{
         super(props);
         autoBind(this);
     }
-    componentDidMount(){
+    componentWillMount(){
         var LocalPostArray = JSON.parse(localStorage.getItem("LocalPostArray")) ;
         if(LocalPostArray){
             LocalPostArray.forEach( a => this.props.submitNewPost({
                 title : a.title,
                 url : a.url,
                 id : a.id,
-                thumbnail: a.thumbnail
+                thumbnail: a.thumbnail,
             }) )
         }
+    }
+    componentDidMount() {
+        console.dir(document.querySelectorAll('div.GRID li'))
     }
     AddPostLater(Post){
         this.props.submitNewPost({
@@ -31,25 +34,29 @@ class BodyGrid  extends  Component{
         });
     }
     shouldComponentUpdate(nextProps){
-        return !_.isEqual(nextProps.AllPosts, this.props.AllPosts );
+        if( !_.isEqual(nextProps.AllPosts, this.props.AllPosts ) ) {
+            //да , нужно обновлять
+            this.setState( {PostArrRefs: []} );
+            return true;
+        } else return false
+        // return !_.isEqual(nextProps.AllPosts, this.props.AllPosts );
     }
     render(){
         return (<div>
             {this.props.AllPosts.length ? <button onClick={this.props.clearPostsById}>CLS</button>:<div/>}
             <div className="GRID"> 
-               
-               <ul> {this.props.AllPosts.map( (Post) => {
+               <ul> {this.props.AllPosts.map( (Post)=> {
                     return (
                         <li>
-                        <AllPostsView
-                            title ={Post.title}
-                            url = {Post.url}
-                            id = {Post.id}
-                            thumbnail = {Post.thumbnail}
-                            AddPostLater = {this.AddPostLater}
-                         />
+                            <AllPostsView
+                                title ={Post.title}
+                                url = {Post.url}
+                                id = {Post.id}
+                                thumbnail = {Post.thumbnail}
+                                AddPostLater = {this.AddPostLater}
+                            />
                         </li>
-                    )
+                    );
                 })
             }</ul>
         </div>  

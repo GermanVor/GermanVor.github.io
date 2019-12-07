@@ -50,8 +50,8 @@ class Main extends  Component{
 
                 <div className="Footer">
                 <ul>{
-                        this.props.PostArray.map( (a) => {
-                            return (<li><FooterPostView
+                        this.props.PostArray.map( (a, ind) => {
+                            return (<li  key = {'PostView_key_' + ind} ><FooterPostView
                                 id = {a.id}
                                 title = {a.title}
                                 url = {a.url}
@@ -68,7 +68,6 @@ class Main extends  Component{
 }
 
 function mapStateToProps(state) {
-    console.log(state);
     return {
         subredditArray : topicsSelectors.getTopics(state),
         PostArray : topicsSelectors.getPostArray(state),

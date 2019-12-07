@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default  ( { id, title, url, thumbnail, DelPost } ) => (
-            <div id = {id} className='FooterPostView'>
+            <div id = {id} className='FooterPostView' >
                 <h1>{title}</h1>
                     {!thumbnail ? false :
                         <img className="thumbnail" src={thumbnail} alt="thumbnail"/>

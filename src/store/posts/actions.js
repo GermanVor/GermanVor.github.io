@@ -13,7 +13,7 @@ export function fetchTopics() {
     return async (dispatch) => {
         try {
             const subredditArray = await redditService.getDefaultSubreddits();
-          dispatch({ type: types.TOPICS_FETCHED, subredditArray });
+            dispatch({ type: types.TOPICS_FETCHED, subredditArray });
         } catch (error) {
             console.error(error);
         }
