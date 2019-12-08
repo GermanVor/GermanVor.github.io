@@ -70,7 +70,12 @@ ul.Topics li{
     width: auto;
 }
 
-div.GRID ul {
+div.GRID {
+    width: 90%;
+    min-height: 50px;
+    margin: 0 auto;
+}
+div.GRID div {
     width: auto;
     background-color: hotpink;
     margin: 10px 5px;
@@ -79,16 +84,18 @@ div.GRID ul {
     text-decoration: none;
     color: white;
     box-shadow: 5px 5px 0 rgb(173, 25, 99);
-    margin: 10px;
+ 
 }
 
 div.GRID ul li {
     display: inline-block;
     list-style: none;
     margin: 10px 5px;
-    border: 2px solid rgb(10, 60, 75);
-  
-    width: 18%;
+   
+    position: absolute;
+    top: 0px;
+    left: 0px;
+   
 }
  
 div.Footer{

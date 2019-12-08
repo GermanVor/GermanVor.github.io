@@ -7,7 +7,7 @@ export default  ( { id, title, url, thumbnail, AddPostLater } ) => (
                     <input type="submit" value="GoToSource" />
                 </form>
                 {
-                    !thumbnail ? false :
+                    !thumbnail ? false : 
                     <img className="thumbnail" src={thumbnail} alt="thumbnail"/>
                 }
                 <div></div>
