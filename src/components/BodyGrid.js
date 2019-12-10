@@ -24,8 +24,11 @@ class BodyGrid  extends  Component {
                 id : a.id,
                 thumbnail: a.thumbnail,
             }) )
-        }
-       
+        };
+
+        if( document.body.clientWidth <= 420 ) this.setState({columns: 1});
+        else if(document.body.clientWidth > 1024) this.setState({columns: 4});
+      
     }
     AddPostLater(Post){
         this.props.submitNewPost({
@@ -49,10 +52,10 @@ class BodyGrid  extends  Component {
         let columns = this.state.columns
         //в каких то случаях лежует устанавливать все в роцентах, в каких то в пикселях
         let width = this.state.ref.current.clientWidth ; // в пикселях
-        
+
         arr.forEach( function( el ) {
             el.style.width = 100 / columns + '%';
-            console.dir(el)
+            
             el.childNodes.forEach( a => a.style.width = '90%' )
         });
     }
