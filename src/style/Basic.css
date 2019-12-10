@@ -131,6 +131,9 @@ div.ViewPost input {
 .ViewPost input:active  {
     background-color: #448dc5;  
 }
+.thumbnail {
+    margin-left: 10px; 
+}
 div.FooterPostView {
     font-weight: 700;
     border-radius: 2%;
