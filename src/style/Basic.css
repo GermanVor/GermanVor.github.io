@@ -8,7 +8,7 @@ section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 90%;
     vertical-align: baseline;
 }
 article, aside, details, figcaption, figure,
@@ -71,12 +71,18 @@ ul.Topics li{
 }
 
 div.GRID {
-    width: 90%;
+    width: 95%;
     min-height: 50px;
     margin: 0 auto;
 }
-div.GRID div {
-    width: auto;
+
+
+div.GRID .column {
+   display: inline-block;
+   vertical-align: top;
+}
+
+div.GRID .column div {
     background-color: hotpink;
     margin: 10px 5px;
     border-radius: 5px;
@@ -84,20 +90,8 @@ div.GRID div {
     text-decoration: none;
     color: white;
     box-shadow: 5px 5px 0 rgb(173, 25, 99);
- 
 }
 
-div.GRID ul li {
-    display: inline-block;
-    list-style: none;
-    margin: 10px 5px;
-   
-    position: absolute;
-    top: 0px;
-    left: 0px;
-   
-}
- 
 div.Footer{
     background-color: mediumspringgreen;
     box-shadow: 5px -5px 0 0 rgb(8, 143, 71);

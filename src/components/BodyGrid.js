@@ -11,7 +11,8 @@ class BodyGrid  extends  Component {
         super(props);
         autoBind(this);
         this.state = {
-            ref: React.createRef()
+            ref: React.createRef(),
+            columns: 3,
         }
     }
     componentWillMount(){
@@ -24,6 +25,7 @@ class BodyGrid  extends  Component {
                 thumbnail: a.thumbnail,
             }) )
         }
+       
     }
     AddPostLater(Post){
         this.props.submitNewPost({
@@ -36,63 +38,47 @@ class BodyGrid  extends  Component {
     shouldComponentUpdate(nextProps){
         if( !_.isEqual(nextProps.AllPosts, this.props.AllPosts ) ) {
             //да , нужно обновлять
+            this.Visualization()
             return true;
         } else return false;
     }
 
-    componentDidUpdate() {
-        this.Visualization()
-    }
+    Visualization() {
+        let arr = [...document.querySelectorAll('div.GRID .column')]
 
-    Visualization(){
-        let arr = [...document.querySelectorAll('div.GRID li')];
-        console.dir( this.state.ref.current )
-      
+        let columns = this.state.columns
+        //в каких то случаях лежует устанавливать все в роцентах, в каких то в пикселях
         let width = this.state.ref.current.clientWidth ; // в пикселях
-        let mainTop = this.state.ref.current.offsetTop;
-        let mainLeft = this.state.ref.current.offsetLeft
-        const a = 3; // смещение для разных экранов - разное, позже надо поменять 
-        let offset = width / a; 
-
-        arr.forEach( function( el, ind){
-
-            el.style.width = offset + 'px';
-            //el.style.left = (ind % a) * offset + mainLeft +'px';
-            let x = (ind % a) * offset + mainLeft;
-            let y = mainTop;
-
-            if( ind-a >= 0 ) {
-                console.log( ind )
-               
-                y = +window.getComputedStyle(arr[ind-a]).transform.split(/\(|,\s|\)/)[6] + arr[ind-a].offsetHeight; //arr[ind-a].getBoundingClientRect().top
-                console.log( +window.getComputedStyle(arr[ind-a]).transform.split(/\(|,\s|\)/)[6] )
-                console.dir(arr[ind-a] )
-            } 
-          
-           el.style.transform = 'translateX('+x+'px) translateY('+y+'px)';
-        } );
-
-        //this.state.ref.current.clientHeight = ;
+        
+        arr.forEach( function( el ) {
+            el.style.width = 100 / columns + '%';
+            console.dir(el)
+            el.childNodes.forEach( a => a.style.width = '90%' )
+        });
     }
-    render(){
+    render() {
+        let ArrColumns = []
+        let w = this.props.AllPosts.length / this.state.columns;
+        for( let i = 0; i < this.state.columns; i++){
+            ArrColumns[i] = <div className='column'>{
+                this.props.AllPosts.slice( i*w, (i+1)*w ).map( (Post) => (
+                    <AllPostsView
+                        title ={Post.title}
+                        url = {Post.url}
+                        id = {Post.id}
+                        thumbnail = {Post.thumbnail}
+                        AddPostLater = {this.AddPostLater}
+                    />
+                )
+            )}</div>;
+        }
+     
         return (<div>
-            {this.props.AllPosts.length ? <button onClick={this.props.clearPostsById}>CLS</button>:<div/>}
-            <div className="GRID" ref={this.state.ref} > 
-               <ul> {this.props.AllPosts.map( (Post)=> {
-                    return (
-                        <li>
-                            <AllPostsView
-                                title ={Post.title}
-                                url = {Post.url}
-                                id = {Post.id}
-                                thumbnail = {Post.thumbnail}
-                                AddPostLater = {this.AddPostLater}
-                            />
-                        </li>
-                    );
-                })
-            }</ul>
-        </div>  
+            {this.props.AllPosts.length ? <button onClick={this.props.clearPostsById}>CLS</button> : <div/>}
+            <div className="GRID" ref={this.state.ref} >
+                    { ArrColumns.reverse().map( (el) => el ) }
+                    <div></div>
+            </div>  
         </div>
         );
     }
