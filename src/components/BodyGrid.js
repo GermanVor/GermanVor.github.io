@@ -40,7 +40,6 @@ class BodyGrid  extends  Component {
     }
     shouldComponentUpdate(nextProps){
         if( !_.isEqual(nextProps.AllPosts, this.props.AllPosts ) ) {
-            //да , нужно обновлять
             this.Visualization()
             return true;
         } else return false;

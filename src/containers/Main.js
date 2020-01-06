@@ -49,18 +49,19 @@ class Main extends  Component{
                 {this.props.PostArray.length ? <button onClick={this.props.clearPostArray}>CLS</button>:<div/>}
 
                 <div className="Footer">
-                <ul>{
-                        this.props.PostArray.map( (a, ind) => {
-                            return (<li  key = {'PostView_key_' + ind} ><FooterPostView
-                                id = {a.id}
-                                title = {a.title}
-                                url = {a.url}
-                                thumbnail = {a.thumbnail}
-                                DelPost = {this.props.DelPost}
-                            /></li>
-                            )
-                        })
-                }</ul></div>
+                    <ul>{
+                            this.props.PostArray.map( (a, ind) => {
+                                return (<li  key = {'PostView_key_' + ind} ><FooterPostView
+                                    id = {a.id}
+                                    title = {a.title}
+                                    url = {a.url}
+                                    thumbnail = {a.thumbnail}
+                                    DelPost = {this.props.DelPost}
+                                /></li>
+                                )
+                            })
+                    }</ul>
+                </div>
 
             </div>
         );
