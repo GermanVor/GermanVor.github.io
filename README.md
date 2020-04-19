@@ -10,6 +10,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 К тому же  были использованы дополнительные библиотеки 
 
-С сайтом можно ознакомиться пройдя по ссылке [GermanVor](https://quizzical-sinoussi-351dcc.netlify.com)
+С сайтом можно ознакомиться пройдя по ссылке [reddit-simple-parcer](https://reddit-simple-parcer.netlify.com)
 
 Чтобы запустить - npm start в главной директории 
